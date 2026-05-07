@@ -1,0 +1,18 @@
+# Noir / Barretenberg build artifacts
+target/
+
+# Generated proofs and witnesses
+*.gz
+proof
+public_inputs
+vk
+
+# Prover inputs (often contain secret witness values)
+# Comment out if you want to commit example inputs
+Prover.toml
+
+# Editor / OS
+.DS_Store
+*.swp
+.vscode/
+.idea/

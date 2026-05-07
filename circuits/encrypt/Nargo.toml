@@ -1,0 +1,6 @@
+[package]
+name = "encrypt"
+type = "bin"
+authors = [""]
+
+[dependencies]
