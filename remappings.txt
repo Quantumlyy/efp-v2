@@ -1,5 +1,10 @@
-@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/
+@openzeppelin/=lib/openzeppelin-contracts/
+@efp/v1/=lib/contracts/src/
+ERC721A/=lib/contracts/lib/ERC721A/contracts/
+contracts/=lib/contracts/src/
+ds-test/=lib/contracts/lib/forge-std/lib/ds-test/src/
 erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/
 forge-std/=lib/forge-std/src/
 halmos-cheatcodes/=lib/openzeppelin-contracts/lib/halmos-cheatcodes/src/
 openzeppelin-contracts/=lib/openzeppelin-contracts/
+openzeppelin/=lib/contracts/lib/openzeppelin-contracts/contracts/
