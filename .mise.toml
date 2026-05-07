@@ -1,0 +1,34 @@
+[tools]
+just     = "latest"
+foundry  = "stable"
+"github:noir-lang/noir" = "1.0.0-beta.2"
+
+[env]
+BB_VERSION = "0.84.0"
+
+[tasks.install-bb]
+description = "Install bb at $BB_VERSION (skips if already current)"
+run = """
+set -e
+if command -v bb &>/dev/null && bb --version 2>/dev/null | grep -q "$BB_VERSION"; then
+  echo "bb $BB_VERSION already installed, skipping"
+  exit 0
+fi
+if ! command -v bbup &>/dev/null; then
+  curl -L https://raw.githubusercontent.com/AztecProtocol/aztec-packages/refs/heads/next/barretenberg/bbup/install | bash
+fi
+export PATH="$HOME/.bb:$PATH"
+bbup -v "$BB_VERSION"
+"""
+
+[tasks.bootstrap]
+description = "First-time setup: mise install + bb + forge deps"
+depends = ["install-bb"]
+run = "forge install"
+
+[tasks.versions]
+run = """
+echo "foundry: $(forge --version | head -1)"
+echo "nargo:   $(nargo --version | head -1)"
+echo "bb:      $(bb --version 2>/dev/null || echo 'not installed')"
+"""
