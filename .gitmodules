@@ -7,3 +7,9 @@
 [submodule "lib/contracts"]
 	path = lib/contracts
 	url = https://github.com/ethereumfollowprotocol/contracts
+[submodule "lib/halmos-cheatcodes"]
+	path = lib/halmos-cheatcodes
+	url = https://github.com/a16z/halmos-cheatcodes
+[submodule "lib/ens-contracts"]
+	path = lib/ens-contracts
+	url = https://github.com/ensdomains/ens-contracts
