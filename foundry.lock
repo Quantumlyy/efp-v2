@@ -2,11 +2,20 @@
   "lib/contracts": {
     "rev": "11115b6b84df3bf95ca4445ee93f4dc52783130e"
   },
+  "lib/ens-contracts": {
+    "tag": {
+      "name": "v1.7.0",
+      "rev": "9b034936a42f462fc04bc0a929a419ede5e18d59"
+    }
+  },
   "lib/forge-std": {
     "tag": {
       "name": "v1.16.1",
       "rev": "620536fa5277db4e3fd46772d5cbc1ea0696fb43"
     }
+  },
+  "lib/halmos-cheatcodes": {
+    "rev": "6da4e692c357ba6d641a2e677a28298cac9f76ab"
   },
   "lib/openzeppelin-contracts": {
     "tag": {

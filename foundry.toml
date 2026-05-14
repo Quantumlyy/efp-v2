@@ -5,8 +5,10 @@ libs = ["lib"]
 
 remappings = [
     "@openzeppelin/=lib/openzeppelin-contracts/",
+    "@ens/=lib/ens-contracts/contracts/",
     "@efp/v1=lib/contracts/src/",
     "@efp/v2/=src/",
+    "halmos-cheatcodes/=lib/halmos-cheatcodes/src/",
 ]
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
