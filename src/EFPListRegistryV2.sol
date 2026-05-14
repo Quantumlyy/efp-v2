@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.23;
 
+import {ENS} from "@ens/registry/ENS.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
 
 import {IEFPListRegistryV2} from "./interfaces/IEFPListRegistryV2.sol";
+import {EFPENSReverse} from "./lib/EFPENSReverse.sol";
 
 /**
  * @title EFPListRegistryV2
@@ -18,6 +20,9 @@ import {IEFPListRegistryV2} from "./interfaces/IEFPListRegistryV2.sol";
  *
  *      List ids start at `0` and increase by one, matching the historical “`totalSupply()` before mint”
  *      convention from the NFT-based registry so indexers and metadata encodings can stay aligned.
+ *
+ *      **ENS:** owner-only `claimReverseENS` / `setReverseENS` forward to the canonical reverse registrar
+ *      from ens-contracts (same operational purpose as v1 `ENSReverseClaimer`).
  */
 contract EFPListRegistryV2 is IEFPListRegistryV2, Ownable, Pausable {
     /// @dev Current registration policy; see `IEFPListRegistryV2.MintState` in the interface NatSpec.
@@ -44,6 +49,16 @@ contract EFPListRegistryV2 is IEFPListRegistryV2, Ownable, Pausable {
     /// @notice Resumes normal operation after `pause`.
     function unpause() external onlyOwner {
         _unpause();
+    }
+
+    /// @notice Claims this contract’s reverse ENS record for `claimant` (see {EFPENSReverse}).
+    function claimReverseENS(ENS ens, address claimant) external onlyOwner returns (bytes32) {
+        return EFPENSReverse.claimReverseENS(ens, claimant);
+    }
+
+    /// @notice Sets this contract’s reverse ENS name (see {EFPENSReverse}).
+    function setReverseENS(ENS ens, string calldata name) external onlyOwner returns (bytes32) {
+        return EFPENSReverse.setReverseENS(ens, name);
     }
 
     /// @inheritdoc IEFPListRegistryV2

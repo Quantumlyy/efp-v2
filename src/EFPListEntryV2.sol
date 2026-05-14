@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.23;
 
+import {ENS} from "@ens/registry/ENS.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
 
@@ -8,6 +9,7 @@ import {IEFPAccountMetadata} from "@efp/v1/interfaces/IEFPAccountMetadata.sol";
 import {IEFPListRecords} from "@efp/v1/interfaces/IEFPListRecords.sol";
 
 import {IEFPListRegistryV2} from "./interfaces/IEFPListRegistryV2.sol";
+import {EFPENSReverse} from "./lib/EFPENSReverse.sol";
 
 /**
  * @title EFPListEntryV2
@@ -16,8 +18,10 @@ import {IEFPListRegistryV2} from "./interfaces/IEFPListRegistryV2.sol";
  *         claims the list slot on the configured L1 `IEFPListRecords` contract.
  *
  * @dev This is the non-NFT analogue of v1 [`EFPListMinter`](https://github.com/ethereumfollowprotocol/contracts):
- *      it does not inherit ENS reverse-record helpers, and it targets `IEFPListRegistryV2` instead of an
- *      ERC-721 registry. Forwarded `msg.value` is passed through to `registry.mintTo` so the registry’s
+ *      it targets `IEFPListRegistryV2` instead of an ERC-721 registry and exposes the same optional
+ *      owner-only reverse-ENS helpers via {EFPENSReverse} and the ens-contracts `ENS` / `IReverseRegistrar`
+ *      types. Forwarded `msg.value`
+ *      is passed through to `registry.mintTo` so the registry’s
  *      `mintPrice` (if any) can be paid in one transaction.
  *
  *      **Bootstrap semantics** mirror v1 `easyMint` / `easyMintTo`: the list id used for `primary-list` is
@@ -56,6 +60,16 @@ contract EFPListEntryV2 is Ownable, Pausable {
     /// @notice Unpauses this entry contract after {pause}.
     function unpause() external onlyOwner {
         _unpause();
+    }
+
+    /// @notice Claims this contract’s reverse ENS record for `claimant` (see {EFPENSReverse}).
+    function claimReverseENS(ENS ens, address claimant) external onlyOwner returns (bytes32) {
+        return EFPENSReverse.claimReverseENS(ens, claimant);
+    }
+
+    /// @notice Sets this contract’s reverse ENS name (see {EFPENSReverse}).
+    function setReverseENS(ENS ens, string calldata name) external onlyOwner returns (bytes32) {
+        return EFPENSReverse.setReverseENS(ens, name);
     }
 
     /**
