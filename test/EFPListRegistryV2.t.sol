@@ -4,8 +4,8 @@ pragma solidity ^0.8.23;
 import {Test} from "forge-std/Test.sol";
 import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
 
-import {EFPListRegistryV2} from "../src/EFPListRegistryV2.sol";
-import {IEFPListRegistryV2} from "../src/interfaces/IEFPListRegistryV2.sol";
+import {EFPListRegistryV2} from "@efp/v2/EFPListRegistryV2.sol";
+import {IEFPListRegistryV2} from "@efp/v2/interfaces/IEFPListRegistryV2.sol";
 
 /// @title EFPListRegistryV2Test
 /// @notice Unit tests for {EFPListRegistryV2}: registration policy, pricing, pause, and ACL on storage updates.

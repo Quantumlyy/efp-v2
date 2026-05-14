@@ -4,9 +4,9 @@ pragma solidity ^0.8.23;
 import {Test} from "forge-std/Test.sol";
 import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
 
-import {EFPListEntryV2} from "../src/EFPListEntryV2.sol";
-import {EFPListRegistryV2} from "../src/EFPListRegistryV2.sol";
-import {IEFPListRegistryV2} from "../src/interfaces/IEFPListRegistryV2.sol";
+import {EFPListEntryV2} from "@efp/v2/EFPListEntryV2.sol";
+import {EFPListRegistryV2} from "@efp/v2/EFPListRegistryV2.sol";
+import {IEFPListRegistryV2} from "@efp/v2/interfaces/IEFPListRegistryV2.sol";
 
 import {MockAccountMetadata, MockListRecords} from "./mocks/EFPMocks.sol";
 

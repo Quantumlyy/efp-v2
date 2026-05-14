@@ -3,7 +3,7 @@ pragma solidity ^0.8.23;
 
 import {Script} from "forge-std/Script.sol";
 
-import {EFPListRegistryV2} from "../src/EFPListRegistryV2.sol";
+import {EFPListRegistryV2} from "@efp/v2/EFPListRegistryV2.sol";
 
 /// @notice Broadcasts a new {EFPListRegistryV2} with `msg.sender` as owner (adjust in fork tests as needed).
 contract DeployEFPRegistryV2Script is Script {
