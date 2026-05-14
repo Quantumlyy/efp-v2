@@ -33,3 +33,34 @@ jobs:
 
       - name: Run Forge tests
         run: forge test -vvv
+
+  halmos:
+    name: Halmos symbolic tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install Halmos
+        run: pip install halmos
+
+      # Halmos reads Solidity compiler JSON from `out/`; Foundry omits AST unless `--ast`.
+      # `forge clean` avoids stale artifacts from a prior non-AST build (e.g. local incremental).
+      - name: Forge build (with AST for Halmos)
+        run: forge clean && forge build --ast
+
+      - name: Run Halmos
+        run: halmos --contract EFPListRegistryV2SymTest --solver-timeout-assertion 120000 --statistics
